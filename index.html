@@ -5,6 +5,13 @@
   </head>
   <body>
     <main>
+      <div id="pages"></div>
+      <form id="post-form" onsubmit="createPost(); return false;">
+      Title:&nbsp;<input type="text" id="title"><br>
+      Author:&nbsp;<input type="text" id="author"><br>
+      <textarea id="body"></textarea><br>
+      <input type="submit" value="Submit">
+      </form>
     </main>
     <script src="node_modules/lodash/lodash.min.js"></script>
     <script src="index.js"></script>
@@ -15,5 +22,37 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script>mocha.setup('bdd');</script>
     <script src="test/index-test.js"></script>
+    <script id="page-template" type="text/x-lodash-template">
+        <div id="sidebar">
+        </div>
+        <div id="post">
+        </div>
+    </script>
+<!--2. Create a `post-template` that will represent the blog post itself. It should have a `header` for the post title and a `footer` for the post author, and be wrapped in an `article` element.-->
+<script id="post-template" type="text/x-lodash-template">
+<article>
+<header id="post-title"><%= title %></header>
+<%= body %>
+<footer id="post-author"><%= author %></footer>
+</article>
+<div id="comments-section"></div>
+</script>
+<!-- 3. Create a `comments-template` that will be the container for the collection of comments on the blog post, as well as the comment form.-->
+<script id="comments-template" type="text/x-lodash-template">
+<form onsubmit="postComment(); return false;">
+Title:&nbsp;<input type="text" id="comment-title"><br>
+Author:&nbsp;<input type="text" id="comment-author"><br>
+<textarea id="comment-body"></textarea><br>
+<input type="submit" value="Submit">
+</form>
+<div id="comments"></div>
+</script>
+<!-- 4. Create a `comment-template` that will hold an individual comment. Should have a `footer` for the commenter name.-->
+<script id="comment-template" type="text/x-lodash-template">
+<%= commentBody %>
+<footer id="commenter-name"><%- commentAuthor %></footer>
+</script>
+<!--5. Provide a form with an id of `post-form` to create a blog post with a title, body, and author. Submitting the form should build the page template with the post inside. Make the form submit using a `createPost()` function.-->
+<!--6. Provide a form within the `comments-template` to post comments, including commenter name and comment text. These should use the template to insert individual comments into the comments section. You should be able to keep adding more comments. Make the form submit use a `postComment()` function.-->
   </body>
 </html>
