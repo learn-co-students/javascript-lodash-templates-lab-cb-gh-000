@@ -1,4 +1,4 @@
-# JavaScript Lodash Templates Lab
+k# JavaScript Lodash Templates Lab
 
 ## Objectives
 
